@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.micro_phones.model.Equipment;
 import com.example.micro_phones.model.EquipmentDetail;
+import com.example.micro_phones.model.EquipmentWrapper;
 import com.example.micro_phones.service.EquipmentService;
 
 /**
@@ -32,15 +32,18 @@ public class EquipmentController {
 
 	/**
 	 * @return
+	 * 
+	 * get the equipment list and filter list as a JSON.
 	 */
 	@RequestMapping(value = "/mobiles", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Equipment>> getMobiles() {
+	public ResponseEntity<EquipmentWrapper> getMobiles() {
 		System.out.println("inside equipment controller");
-		List<Equipment> mobiles = equipmentService.getMobiles();
-		if (mobiles.isEmpty()) {
-			return new ResponseEntity<List<Equipment>>(HttpStatus.NO_CONTENT);
+		EquipmentWrapper equipmentWrapper = equipmentService.getMobiles();
+		
+		if (equipmentWrapper.getEquipmentLst().isEmpty()) {
+			return new ResponseEntity<EquipmentWrapper>(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<List<Equipment>>(mobiles, HttpStatus.OK);
+		return new ResponseEntity<EquipmentWrapper>(equipmentWrapper, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/equipmentDetail", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

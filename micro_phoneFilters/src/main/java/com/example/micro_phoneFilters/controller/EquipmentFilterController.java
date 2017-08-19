@@ -11,12 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.micro_phoneFilters.model.EquipmentFilter;
 import com.example.micro_phoneFilters.service.EquipmentFilterService;
 
+/**
+ * @author Rohit
+ *
+ */
 @RestController
 public class EquipmentFilterController {
 	
 	@Autowired
 	private EquipmentFilterService equipmentFilterService;
 
+	/**
+	 * @return
+	 */
 	@RequestMapping(value = "/filters", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<EquipmentFilter> getFilters() {
 		System.out.println("inside Filter controller");
