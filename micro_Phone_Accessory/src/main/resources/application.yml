@@ -1,0 +1,11 @@
+# Set the server Port
+server:
+  port: 2021
+  
+# Name of the application.
+spring: 
+  application:
+    name: phonePlans
+  cloud:
+    config:
+      uri: http://localhost:4040

@@ -1,0 +1,12 @@
+# Port of the server.
+server:
+  port: 2022
+
+# Name of the application.
+spring: 
+  application:
+    name: phoneFilters
+  cloud:
+    config:
+      uri: http://localhost:4040
+      

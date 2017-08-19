@@ -1,0 +1,15 @@
+# Port of the server.
+server:
+  port: 4040
+  
+# Name of the application. Set configuration file from localsystem.
+spring:
+  application:
+    name: config
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: ../config/
