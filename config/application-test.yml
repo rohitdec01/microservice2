@@ -1,0 +1,11 @@
+spring:
+  jpa:
+    database: MYSQL
+    hibernate:
+      ddl-auto: update
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/phonedb
+    username: root
+    password: root
+    

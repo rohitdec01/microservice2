@@ -44,21 +44,8 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
-			<groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<!-- Start: Dependency for test Bundles- Junit, Mokito, Hamcrest and spring 
-			framework test Libraries -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<!-- End: Dependency for test Bundles- Junit, Mokito, Hamcrest, Assertj 
-			library and spring framework test Libraries -->
-		<!-- tag:For configuring client. Centralized configuration. -->
+
+		<!-- Start :For configuring client. Centralized configuration. -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
@@ -78,6 +65,68 @@
 			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
 	</dependencies>
+	
+	<!-- Implement profiles in maven for the different environment. -->
+	<!-- We can change default profile dynamically while maven build mvn package 
+		-Denv=local/dev/test -->
+	<profiles>
+		<profile>
+			<id>local</id>
+			<!-- The development profile is active by default -->
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<env>local</env>
+			</properties>
+			<dependencies>
+				<!-- Start: Dependency for HSQL in memory DB -->
+					<!-- <dependency>
+						<groupId>org.hsqldb</groupId>
+						<artifactId>hsqldb</artifactId>
+						<scope>runtime</scope>
+					</dependency> -->
+				<!-- End: Dependency for HSQL in memory DB -->
+				<!-- Start: Dependency for test Bundles- 
+					Junit, Mokito, Hamcrest and spring framework test Libraries --> 
+					<dependency>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-starter-test</artifactId>
+						<scope>test</scope>
+					</dependency>
+				<!-- End: Dependency for test Bundles- Junit, Mokito, Hamcrest, Assertj 
+			library and spring framework test Libraries -->
+			</dependencies>
+		</profile>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<env>dev</env>
+			</properties>
+			<dependencies>
+				<!-- Start: Dependency for mySql DB -->
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+					</dependency>
+				<!-- End: Dependency for mySql -->
+			</dependencies>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<env>test</env>
+			</properties>
+			<dependencies>
+				<!-- Start: Dependency for mySql DB -->
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+					</dependency>
+				<!-- End: Dependency for mySql -->
+			</dependencies>
+		</profile>
+	</profiles>
 
 	<dependencyManagement>
 		<dependencies>
@@ -97,6 +146,10 @@
 	</dependencyManagement>
 
 	<build>
+		<filters>
+			<!-- <filter>application-${env}.yml</filter> -->
+			<!-- <filter>src/main/profiles/${env}.yml</filter> -->
+		</filters>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

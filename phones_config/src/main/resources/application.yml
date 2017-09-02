@@ -2,13 +2,28 @@ server:
   port: 8888
   
 # Name of the application. Set configuration file from localsystem.
+#below configuration is not working with mutliple profiles.
+#spring:
+#  application:
+#    name: config
+#  profiles:
+#    active: native
+#  cloud:
+#    config:
+#      server:
+#        native: 
+#          search-locations: ../config/
+
+# Name of the application. Set configuration file from localsystem.
+# This is working with multiple profiles as well.
+
 spring:
   application:
     name: config
-  profiles:
-    active: native
-  cloud:
+  cloud: 
     config:
       server:
-        native:
-          search-locations: ../config/
+        git:
+          uri: C:/WORK_ENV/workspace/microservice2/
+          search-paths: 
+           - config
