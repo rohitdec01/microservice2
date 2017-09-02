@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,10 +27,13 @@ import com.example.phones.service.PhoneService;
 @RestController
 public class PhoneContoller {
 	
-	private static final Logger logger = LoggerFactory.getLogger(PhoneContoller.class);
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private PhoneService phoneService; 
+	
+	@Autowired
+    private CacheManager cacheManager;
 	
 	/**
 	 * @return
@@ -44,7 +48,9 @@ public class PhoneContoller {
 	 */
 	@RequestMapping(value = "/phones", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Phone>> getPhones() {
+		logger.info("previous controller method called.");
 		List<Phone> phones = phoneService.getPhones();
+		logger.info("Controller after calling service/cache method called.");
 		if (phones.isEmpty()) {
 			return new ResponseEntity<List<Phone>>(HttpStatus.NO_CONTENT);
 		}

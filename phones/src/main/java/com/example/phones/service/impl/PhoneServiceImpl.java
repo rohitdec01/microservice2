@@ -4,10 +4,14 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import com.example.phones.controller.exception.PhoneException;
 import com.example.phones.model.Phone;
 import com.example.phones.model.PhoneDetail;
 import com.example.phones.repository.PhoneDetailRepository;
@@ -19,7 +23,10 @@ import com.example.phones.service.PhoneService;
  *
  */
 @Service
+@CacheConfig(cacheNames = "phones")
 public class PhoneServiceImpl implements PhoneService {
+	
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private PhoneRepository phoneRepo;
@@ -46,7 +53,9 @@ public class PhoneServiceImpl implements PhoneService {
 	 * @see com.example.phones.service.PhoneService#getPhones()
 	 */
 	@Override
+	@Cacheable//(condition = "#instrument.equals('trombone')")
 	public List<Phone> getPhones() {
+		logger.info("Inside service method called.");
 		List<Phone> phones = phoneRepo.findAll();
 		return phones;
 	}
@@ -111,5 +120,13 @@ public class PhoneServiceImpl implements PhoneService {
 		// TODO Auto-generated method stub
 		return phoneRepo.findByphoneName(phoneName);
 	}
+
+	@Override
+	@CacheEvict(allEntries = true)
+	public void clearCache() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

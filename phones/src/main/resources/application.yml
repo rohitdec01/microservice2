@@ -1,8 +1,21 @@
 # Application name and config server information.
-
+server:
+  port: 2020
 spring:
   application:
     name: phones
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  jpa: 
+    database: MYSQL
+    hibernate:
+      ddl-auto: update
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/phonedb
+    username: root
+    password: root
   cloud:
     config:
       uri: http://localhost:9090

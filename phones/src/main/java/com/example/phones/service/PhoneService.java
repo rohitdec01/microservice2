@@ -46,5 +46,7 @@ public interface PhoneService {
 	 * @return
 	 */
 	public void deletePhoneById(long id) throws Exception;
+	
+	public void clearCache();
 
 }
