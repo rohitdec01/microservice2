@@ -1,0 +1,8 @@
+# Application name and config server information.
+
+spring:
+  application:
+    name: phones
+  cloud:
+    config:
+      uri: http://localhost:9090

@@ -1,7 +1,24 @@
-# Configuration for Eureka server.  
+# This is common configuration between all services.
+
+# Eureka configurtion between all services.
 eureka:
+  instance:
+    hostname: localhost
   client:
     service-url:
       defaultZone: http://${eureka.instance.hostname}:8761/eureka/
-  instance:
-    hostname: localhost
+
+# Set profile and JPA HSQL configuration.
+spring:
+  profiles:
+      active: local
+  jpa: 
+    database: HSQL
+    hibernate:
+      ddl-auto: update
+  datasource: 
+    driverClassName: org.hsqldb.jdbcDriver
+    username: sa
+    password: 
+    url: jdbc:hsqldb:file:database/demo/phoneDB.db
+      
