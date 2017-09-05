@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.phones.controller.exception.PhoneException;
 import com.example.phones.model.Phone;
 import com.example.phones.model.Response;
+import com.example.phones.pojo.PhoneWrapper;
 import com.example.phones.service.PhoneService;
 
 /**
@@ -47,15 +48,18 @@ public class PhoneContoller {
 	 * @return
 	 */
 	@RequestMapping(value = "/phones", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Phone>> getPhones() {
+	public ResponseEntity<PhoneWrapper> getPhones() {
 		logger.info("previous controller method called.");
 		List<Phone> phones = phoneService.getPhones();
+		
+		PhoneWrapper phoneWrapper  = new PhoneWrapper();
+		phoneWrapper.setPhoneLst(phones);
+		phoneWrapper.setFilterCategory(phoneService.getEquipmentFilters());
 		logger.info("Controller after calling service/cache method called.");
 		if (phones.isEmpty()) {
-			return new ResponseEntity<List<Phone>>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<PhoneWrapper>(HttpStatus.NO_CONTENT);
 		}
-
-		return new ResponseEntity<List<Phone>>(phones, HttpStatus.OK);
+		return new ResponseEntity<PhoneWrapper>(phoneWrapper, HttpStatus.OK);
 	}
 
 	/**
@@ -67,7 +71,6 @@ public class PhoneContoller {
 		
 		Phone phone = null;
 		phone = phoneService.getPhoneById(id);
-		phone.setPhoneName("");
 		if (phone == null) {
 			throw new PhoneException("Phone with this id does not exist");
 		} else if (phone.getPhoneName() == "") {

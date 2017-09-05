@@ -1,11 +1,17 @@
 package com.example.micro_phoneFilters.service.impl;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.Set;
 
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.micro_phoneFilters.model.EquipmentFilter;
+import com.example.micro_phoneFilters.model.FilterCategory;
+import com.example.micro_phoneFilters.repository.EquipmentFilterRepository;
+import com.example.micro_phoneFilters.repository.FilterCategoryRepository;
 import com.example.micro_phoneFilters.service.EquipmentFilterService;
 
 /**
@@ -13,28 +19,30 @@ import com.example.micro_phoneFilters.service.EquipmentFilterService;
  *
  */
 @Service
+@Transactional
 public class EquipmentFilterServiceImpl implements EquipmentFilterService {
+	
+	@Autowired
+	private FilterCategoryRepository filterCategoryRepo;
+	
+	@Autowired
+	private EquipmentFilterRepository equipmentFilterRepo;
 
+	/* (non-Javadoc)
+	 * @see com.example.micro_phoneFilters.service.EquipmentFilterService#getEquipmentFilters()
+	 * 
+	 * This is not working as per my expectation. It is not returning child object.(list of filter based on the category)
+	 */
 	@Override
-	public EquipmentFilter getEquipmentFilters() {
-
-		return getEquipmentFilterTest();
+	public List<FilterCategory> getEquipmentFilters() {
+		List<FilterCategory> filterCategory = filterCategoryRepo.findAll();
+		return filterCategory;
 	}
-
-	private EquipmentFilter getEquipmentFilterTest() {
-		EquipmentFilter equipmentFilters = new EquipmentFilter();
-
-		Map<String, String> typeList = new HashMap<>();
-		typeList.put("smart", "Smart Phones");
-		typeList.put("normal", "Normal Phones");
-		equipmentFilters.setType(typeList);
-
-		Map<String, String> brandList = new HashMap<>();
-		brandList.put("apple", "Apple");
-		brandList.put("samgsung", "Samsung");
-		equipmentFilters.setBrand(brandList);
-
-		return equipmentFilters;
-	}
-
+	
+	/*@Override
+	public List<EquipmentFilter> getEquipmentFilters2() {
+		List<EquipmentFilter> filters = equipmentFilterRepo.findAll();
+		return filters;
+	}*/
+	
 }

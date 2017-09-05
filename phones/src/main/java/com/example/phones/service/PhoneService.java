@@ -3,6 +3,8 @@ package com.example.phones.service;
 import java.util.List;
 
 import com.example.phones.controller.exception.PhoneException;
+import com.example.phones.model.EquipmentFilter;
+import com.example.phones.model.FilterCategory;
 import com.example.phones.model.Phone;
 import com.example.phones.model.PhoneDetail;
 
@@ -47,6 +49,14 @@ public interface PhoneService {
 	 */
 	public void deletePhoneById(long id) throws Exception;
 	
+	/**
+	 * 
+	 */
 	public void clearCache();
+	
+	/**
+	 * @return
+	 */
+	public List<FilterCategory> getEquipmentFilters();
 
 }

@@ -1,41 +1,63 @@
 package com.example.micro_phoneFilters.model;
 
 import java.io.Serializable;
-import java.util.Map;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 /**
  * @author Rohit
  *
  */
+@Entity
+@Table(name = "EQUIPMENT_FILTER")
 public class EquipmentFilter implements Serializable {
-
 	private static final long serialVersionUID = 1L;
-	private int id;
-	private Map<String, String> type; // Smart, Normal
-	private Map<String, String> brand; // Sumsung, Apple
 
-	public int getId() {
-		return id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer filterID;
+	private String filterName;
+		
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "filterCat_fk")
+	@JsonBackReference
+	private FilterCategory filterCategory;
+	
+	public Integer getFilterID() {
+		return filterID;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setFilterID(Integer filterID) {
+		this.filterID = filterID;
 	}
 
-	public Map<String, String> getType() {
-		return type;
+	public EquipmentFilter() {
+
 	}
 
-	public void setType(Map<String, String> type) {
-		this.type = type;
+	public String getFilterName() {
+		return filterName;
 	}
 
-	public Map<String, String> getBrand() {
-		return brand;
+	public void setFilterName(String filterName) {
+		this.filterName = filterName;
 	}
 
-	public void setBrand(Map<String, String> brand) {
-		this.brand = brand;
+	public FilterCategory getFilterCategory() {
+		return filterCategory;
+	}
+
+	public void setFilterCategory(FilterCategory filterCategory) {
+		this.filterCategory = filterCategory;
 	}
 
 }

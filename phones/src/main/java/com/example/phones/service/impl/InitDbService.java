@@ -5,6 +5,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.web.ServletTestExecutionListener;
 
 import com.example.phones.model.Phone;
 import com.example.phones.repository.PhoneRepository;
@@ -26,7 +27,7 @@ public class InitDbService {
 		if (phoneRepository != null) {
 			Phone phone1 = new Phone();
 			phone1.setPhoneName("Iphone 6")
-				  .setPhonemanufacturer("Apple"); 
+				  .setPhonemanufacturer("Apple");
 			phoneRepository.save(phone1);
 
 			Phone phone2 = new Phone();

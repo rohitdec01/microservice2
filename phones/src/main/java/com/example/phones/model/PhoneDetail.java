@@ -27,11 +27,11 @@ public class PhoneDetail implements Serializable {
 	private Long id;
 	private String type; // smart, Normal
 	private String color;
-	
+
 	@OneToOne
-	@JoinColumn(name="id", referencedColumnName="id")
+	@JoinColumn(name = "id", referencedColumnName = "id")
 	private Phone phone;
-	
+
 	public PhoneDetail() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -63,7 +63,7 @@ public class PhoneDetail implements Serializable {
 	public void setColor(String color) {
 		this.color = color;
 	}
-	
+
 	public Phone getPhone() {
 		return phone;
 	}

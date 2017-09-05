@@ -2,13 +2,11 @@ package com.example.phones.model;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -30,15 +28,26 @@ public class Phone implements Serializable {
 
 	private String phoneName;
 	private String phonemanufacturer;
-	
+
+	// @JsonInclude(JsonInclude.Include.NON_NULL)
+	/**
+	 * I am setting this from another service.
+	 */
+	/*
+	 * @JsonInclude()
+	 * 
+	 * @Transient private EquipmentFilter phoneFiltes;
+	 */
+
 	public Phone() {
-		
+
 	}
-	
+
 	public Phone(String phoneName, String phonemanufacturer) {
 		this.phoneName = phoneName;
 		this.phonemanufacturer = phonemanufacturer;
 	}
+
 	// private PhoneDetail phoneDetail;
 
 	/**
@@ -62,6 +71,13 @@ public class Phone implements Serializable {
 		return id;
 	}
 
+	/*
+	 * public EquipmentFilter getPhoneFiltes() { return phoneFiltes; }
+	 * 
+	 * public void setPhoneFiltes(EquipmentFilter phoneFiltes) {
+	 * this.phoneFiltes = phoneFiltes; }
+	 */
+
 	/**
 	 * @param id
 	 */
@@ -80,8 +96,8 @@ public class Phone implements Serializable {
 	/**
 	 * @param phoneName
 	 * 
-	 * I am using builder pattern here Just for fun.
-	 * Check the return statement.
+	 *            I am using builder pattern here Just for fun. Check the return
+	 *            statement.
 	 */
 	public Phone setPhoneName(String phoneName) {
 		this.phoneName = phoneName;

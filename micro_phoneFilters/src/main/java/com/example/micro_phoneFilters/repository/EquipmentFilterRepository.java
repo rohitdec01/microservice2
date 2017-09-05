@@ -1,9 +1,15 @@
 package com.example.micro_phoneFilters.repository;
 
-public class EquipmentFilterRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-	public EquipmentFilterRepository() {
-		// TODO Auto-generated constructor stub
-	}
+import com.example.micro_phoneFilters.model.EquipmentFilter;
+
+/**
+ * @author Rohit
+ *
+ */
+@Repository
+public interface EquipmentFilterRepository extends JpaRepository<EquipmentFilter, Integer> {
 
 }

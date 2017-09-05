@@ -10,12 +10,9 @@ spring:
   jpa: 
     database: MYSQL
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
   datasource:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/phonedb
     username: root
     password: root
-  cloud:
-    config:
-      uri: http://localhost:9090

@@ -1,5 +1,9 @@
 package com.example.phones.service.impl;
 
+import static org.hamcrest.Matchers.stringContainsInOrder;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -10,13 +14,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import com.example.phones.model.FilterCategory;
 import com.example.phones.model.Phone;
 import com.example.phones.model.PhoneDetail;
 import com.example.phones.repository.PhoneDetailRepository;
 import com.example.phones.repository.PhoneRepository;
 import com.example.phones.service.PhoneService;
+import org.springframework.http.HttpStatus;
 
 /**
  * @author rb611j
@@ -57,6 +65,7 @@ public class PhoneServiceImpl implements PhoneService {
 	public List<Phone> getPhones() {
 		logger.info("Inside service method called.");
 		List<Phone> phones = phoneRepo.findAll();
+		//getEquipmentFilters();
 		return phones;
 	}
 
@@ -126,6 +135,23 @@ public class PhoneServiceImpl implements PhoneService {
 	public void clearCache() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	
+	/* (non-Javadoc)
+	 * @see com.example.phones.service.PhoneService#getEquipmentFilters()
+	 * 
+	 * Get filterlist from the filterservice.
+	 */
+	@Override
+	public List<FilterCategory> getEquipmentFilters() {
+		RestTemplate restTemplate = new RestTemplate();
+		String url = "http://localhost:2022/filters";
+ 		//FilterCategory filterCategories = restTemplate.getForObject(url, FilterCategory.class);
+		@SuppressWarnings("unchecked")
+		List<FilterCategory> filterCategories = restTemplate.getForObject(url, List.class);
+		
+		return filterCategories;
 	}
 
 

@@ -1,12 +1,35 @@
 # Port of the server.
-server:
+server: 
   port: 2022
-
-# Name of the application.
-spring: 
+spring:
   application:
-    name: phoneFilters
-  cloud:
-    config:
-      uri: http://localhost:4040
+    name: phonesFilters
+  jpa: 
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate: 
+        type: TRACE 
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/phonedb
+    username: root
+    password: root
+    
+logging:
+  level:
+    org:
+      hibernate:
+        type: trace
+
+     
+# Name of the application.
+#spring: 
+#  application:
+#    name: phoneFilters
+#  cloud:
+#    config:
+#      uri: http://localhost:4040
       
