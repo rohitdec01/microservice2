@@ -5,9 +5,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.test.context.web.ServletTestExecutionListener;
 
-import com.example.phones.model.Phone;
+import com.example.phones.entity.Phone;
 import com.example.phones.repository.PhoneRepository;
 
 /**
@@ -19,7 +18,7 @@ import com.example.phones.repository.PhoneRepository;
 public class InitDbService {
 
 	@Autowired
-	PhoneRepository phoneRepository;
+	private PhoneRepository phoneRepository;
 
 	@PostConstruct
 	public void init() {

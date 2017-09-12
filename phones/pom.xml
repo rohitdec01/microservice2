@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>phones</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Phones project.</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -25,6 +25,10 @@
 	</properties>
 
 	<dependencies>
+	<!--  To checkth health of the application and can be used in other parts as well
+		e.g. http://localhost:port/health
+			 http://localhost:port/beans
+		 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -36,6 +40,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-feign</artifactId>
 		</dependency>
 
 		<dependency>
@@ -49,10 +58,6 @@
 			<artifactId>hsqldb</artifactId>
 			<scope>runtime</scope>
 		</dependency> -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -102,8 +107,9 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>Camden.BUILD-SNAPSHOT</version>
+				<!-- <version>Camden.BUILD-SNAPSHOT</version> -->
 				<!-- <version>Brixton.RELEASE</version> -->
+				<version>Dalston.SR3</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -115,10 +121,22 @@
 	</dependencyManagement>
 
 	<build>
+		<finalName>phones-service</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.example.phones.PhonesApplication</mainClass>
+					<addResources>true</addResources>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

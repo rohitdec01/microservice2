@@ -1,19 +1,19 @@
 # Set the server Port
-#server:
-#  port: 8761
+server:
+  port: ${PORT:8761}
   
-# Name of the application
-spring:
+# Name of the application - eureka
+spring: 
   application:
-    name: eureka
-  cloud:
-    config:
-      uri: http://localhost:4040
-    
-#eureka:
-#  client:
-#    register-with-eureka: false
-#    fetch-registry: false
+    name: discovery-service
 
-
+# Configuration of Eureka server.
+eureka:  
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+  server:
+    enableSelfPreservation: false  
 

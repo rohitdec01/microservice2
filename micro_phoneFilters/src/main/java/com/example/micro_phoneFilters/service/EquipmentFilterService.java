@@ -2,7 +2,7 @@ package com.example.micro_phoneFilters.service;
 
 import java.util.List;
 
-import com.example.micro_phoneFilters.model.FilterCategory;
+import com.example.micro_phoneFilters.entity.FilterCategory;
 
 /**
  * @author Rohit

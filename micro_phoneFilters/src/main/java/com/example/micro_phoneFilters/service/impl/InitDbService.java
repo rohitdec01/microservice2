@@ -6,8 +6,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.micro_phoneFilters.model.EquipmentFilter;
-import com.example.micro_phoneFilters.model.FilterCategory;
+import com.example.micro_phoneFilters.entity.EquipmentFilter;
+import com.example.micro_phoneFilters.entity.FilterCategory;
 import com.example.micro_phoneFilters.repository.EquipmentFilterRepository;
 import com.example.micro_phoneFilters.repository.FilterCategoryRepository;
 

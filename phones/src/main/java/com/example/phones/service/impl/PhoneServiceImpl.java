@@ -1,9 +1,5 @@
 package com.example.phones.service.impl;
 
-import static org.hamcrest.Matchers.stringContainsInOrder;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -14,17 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.example.phones.entity.Phone;
+import com.example.phones.intercomm.feignClient.PhoneDetailClient;
 import com.example.phones.model.FilterCategory;
-import com.example.phones.model.Phone;
-import com.example.phones.model.PhoneDetail;
-import com.example.phones.repository.PhoneDetailRepository;
 import com.example.phones.repository.PhoneRepository;
 import com.example.phones.service.PhoneService;
-import org.springframework.http.HttpStatus;
 
 /**
  * @author rb611j
@@ -38,8 +31,13 @@ public class PhoneServiceImpl implements PhoneService {
 
 	@Autowired
 	private PhoneRepository phoneRepo;
+	
+	
+	/**
+	 * This is for Feign Client.  
+	 */
 	@Autowired
-	private PhoneDetailRepository phoneDetailRepo;
+	private PhoneDetailClient phoneDetailClient;
 
 	/**
 	 * No-Arg Constructor
@@ -65,7 +63,7 @@ public class PhoneServiceImpl implements PhoneService {
 	public List<Phone> getPhones() {
 		logger.info("Inside service method called.");
 		List<Phone> phones = phoneRepo.findAll();
-		//getEquipmentFilters();
+		getEquipmentFilters();
 		return phones;
 	}
 
@@ -80,24 +78,16 @@ public class PhoneServiceImpl implements PhoneService {
 		Phone phone;
 		try {
 			phone = phoneRepo.findById(id);
+			
+			// We need to get phone detail as per the phone from Phone_detail microservice.
+			//So I will use Feign client for that.
+			phone.setPhoneDetail(phoneDetailClient.getPhoneDetailById(id));
+			System.out.println("after getting phone detail from Feign client.");
 		} catch (Exception e) {
 			throw new Exception();
 		}
 		
 		return phone;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.example.phones.service.PhoneService#getPhoneDetailById(java.lang.
-	 * Long)
-	 */
-	@Override
-	public PhoneDetail getPhoneDetailById(Long id) {
-		PhoneDetail phoneDetail = null;// phoneDetailRepo.getPhoneDetailByPhoneId(id);
-		return phoneDetail;
 	}
 
 	/*
@@ -137,11 +127,10 @@ public class PhoneServiceImpl implements PhoneService {
 		
 	}
 	
-	
 	/* (non-Javadoc)
 	 * @see com.example.phones.service.PhoneService#getEquipmentFilters()
 	 * 
-	 * Get filterlist from the filterservice.
+	 * Get filterlist from the filterservice using Rest Template.
 	 */
 	@Override
 	public List<FilterCategory> getEquipmentFilters() {

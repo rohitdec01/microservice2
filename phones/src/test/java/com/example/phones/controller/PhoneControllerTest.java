@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import com.example.phones.model.Phone;
+import com.example.phones.entity.Phone;
 import com.example.phones.service.PhoneService;
 
 /**

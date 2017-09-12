@@ -1,15 +1,13 @@
 package com.example.micro_phoneFilters.service.impl;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.micro_phoneFilters.model.EquipmentFilter;
-import com.example.micro_phoneFilters.model.FilterCategory;
+import com.example.micro_phoneFilters.entity.FilterCategory;
 import com.example.micro_phoneFilters.repository.EquipmentFilterRepository;
 import com.example.micro_phoneFilters.repository.FilterCategoryRepository;
 import com.example.micro_phoneFilters.service.EquipmentFilterService;

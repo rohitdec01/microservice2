@@ -8,16 +8,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.example.phones.PhonesApplication;
 import com.example.phones.PhonesApplicationTests;
-import com.example.phones.model.Phone;
+import com.example.phones.entity.Phone;
 import com.example.phones.repository.PhoneRepository;
 import com.example.phones.service.impl.PhoneServiceImpl;
 

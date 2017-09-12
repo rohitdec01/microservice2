@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.micro_phoneFilters.model.EquipmentFilter;
-import com.example.micro_phoneFilters.model.FilterCategory;
+import com.example.micro_phoneFilters.entity.EquipmentFilter;
+import com.example.micro_phoneFilters.entity.FilterCategory;
 import com.example.micro_phoneFilters.service.EquipmentFilterService;
 
 /**

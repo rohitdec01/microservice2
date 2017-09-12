@@ -2,7 +2,7 @@ package com.example.phones.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.phones.model.Phone;
+import com.example.phones.entity.Phone;
 
 /**
  * @author rb611j

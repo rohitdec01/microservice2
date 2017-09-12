@@ -1,16 +1,11 @@
 # Application name and config server port.
 server:
-  port: ${PORT:2020}
+  port: ${PORT:2021}
 
-# This is for health checkof the application.
-# http://localhost:1020/health  
-management:
-  port: ${PORT:1020}
-  
 # Spring - application Name, Cache, JPA and datasource configuration. 
 spring:
   application:
-    name: phones-service
+    name: phonesDetail-service
   jpa: 
     database: MYSQL
     hibernate:
