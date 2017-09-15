@@ -1,0 +1,53 @@
+# Application name and config server port.
+server: 
+  port: 8765
+  
+spring:
+  application:
+    name: gateway-service
+
+#################################
+#     Zuul configuration        #
+#################################  
+info:
+  component: Edge Server
+  
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+
+zuul:
+  prefix: /
+  routes:
+    phoneDetail: 
+      path: phoneDetailApi/**
+      serviceId: phonesDetail-service
+    filter: 
+      path: filterApi/**
+      serviceId: phone_Filters-Service 
+    phone: 
+      path: phoneApi/**
+      serviceId: phones-service  
+###### END: Zuul configuration ######
+
+# logging support.  
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: DEBUG
+    
+##########################################
+#     Eureka Client configuration        #
+##########################################  
+eureka:  
+  client:
+    serviceUrl:
+      defaultZone: ${DISCOVERY_URL:http://localhost:8761}/eureka/
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+#### End: Eureka Client configuration ####

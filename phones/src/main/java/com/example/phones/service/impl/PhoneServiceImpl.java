@@ -135,7 +135,8 @@ public class PhoneServiceImpl implements PhoneService {
 	@Override
 	public List<FilterCategory> getEquipmentFilters() {
 		RestTemplate restTemplate = new RestTemplate();
-		String url = "http://localhost:2022/filters";
+		//String url = "http://localhost:2022/filterApi/filters";
+		String url = "http://localhost:8765/filterApi/filters"; // get the filter data from filter API using zuul gateway
  		//FilterCategory filterCategories = restTemplate.getForObject(url, FilterCategory.class);
 		@SuppressWarnings("unchecked")
 		List<FilterCategory> filterCategories = restTemplate.getForObject(url, List.class);

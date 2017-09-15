@@ -27,7 +27,9 @@ logging:
       org.springframework: WARN
       org.hibernate: WARN
       
-# Eureka Client configuration
+##########################################
+#     Eureka Client configuration        #
+##########################################
 eureka:  
   client:
     serviceUrl:
@@ -35,3 +37,4 @@ eureka:
   instance:
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
+#### End: Eureka Client configuration ####

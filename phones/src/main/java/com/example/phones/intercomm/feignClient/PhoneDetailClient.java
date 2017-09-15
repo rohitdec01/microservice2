@@ -21,7 +21,7 @@ public interface PhoneDetailClient {
 	 * @param phoneId
 	 * @return
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "/phoneDetail/phone/{phoneId}")
+	@RequestMapping(method = RequestMethod.GET, value = "phone/{phoneId}")
 	public PhoneDetail getPhoneDetailById(@PathVariable("phoneId") Long phoneId);
 
 }

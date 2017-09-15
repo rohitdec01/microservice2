@@ -25,6 +25,7 @@ import com.example.phones.service.PhoneService;
  *
  */
 @RestController
+@RequestMapping("/*")
 public class PhoneContoller {
 
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -39,7 +40,7 @@ public class PhoneContoller {
 	/**
 	 * @return
 	 */
-	@RequestMapping("/")
+	@RequestMapping("index")
 	public String index() {
 		return "This is Root of my application";
 	}
@@ -48,7 +49,7 @@ public class PhoneContoller {
 	 * @return
 	 */
 	// @pathVariable
-	@RequestMapping(value = "/phones", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "phones", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PhoneWrapper> getPhones() {
 		logger.info("previous controller method called.");
 		List<Phone> phones = phoneService.getPhones();
@@ -67,7 +68,7 @@ public class PhoneContoller {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "/phone/{PhoneId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "byid/{PhoneId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	// public ResponseEntity<Phone> getPhoneById(@RequestParam(value = "id")
 	// long id) throws PhoneException, Exception {
 	public ResponseEntity<Phone> getPhoneById(@PathVariable("PhoneId") Long PhoneId) throws PhoneException, Exception {
@@ -87,7 +88,7 @@ public class PhoneContoller {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "/phoneName/{phoneName}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "byname/{phoneName}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	// public Phone getPhoneByPhoneName(@RequestParam(value = "name",
 	// defaultValue = "Iphone 6") String name) {
 	public Phone getPhoneByPhoneName(@PathVariable("phoneName") String phoneName) {
@@ -98,7 +99,7 @@ public class PhoneContoller {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "/phone/{PhoneId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = {"remove/{PhoneId}","delete/{PhoneId}"}, method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	// public ResponseEntity<Response> deletePhoneById(@RequestParam(value =
 	// "id") long id) throws PhoneException {
 	public ResponseEntity<Response> deletePhoneById(@PathVariable("PhoneId") Long PhoneId) throws PhoneException {
@@ -115,7 +116,7 @@ public class PhoneContoller {
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping(value = "/phone", method = RequestMethod.POST)
+	@RequestMapping(value = "add", method = RequestMethod.POST)
 	public ResponseEntity<Void> addPhone(@RequestBody Phone phone) {
 
 		/*

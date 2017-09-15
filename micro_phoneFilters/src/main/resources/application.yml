@@ -5,16 +5,13 @@ server:
 # Spring - application Name, JPA and datasource configuration.
 spring:
   application:
-    name: Phone_Filters-Service
+    name: phone_Filters-Service
   jpa: 
     database: MYSQL
     show-sql: true
     hibernate:
       ddl-auto: create
-    properties:
-      hibernate: 
-        type: TRACE 
-  datasource:
+  datasource: 
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/phonedb
     username: root
@@ -28,11 +25,14 @@ logging:
       org.springframework: WARN
       org.hibernate: WARN    
 
-# Eureka Client configuration
+##########################################
+#     Eureka Client configuration        #
+##########################################
 eureka:  
   client:
     serviceUrl:
       defaultZone: ${DISCOVERY_URL:http://localhost:8761}/eureka/
   instance:
     leaseRenewalIntervalInSeconds: 1
-    leaseExpirationDurationInSeconds: 2      
+    leaseExpirationDurationInSeconds: 2
+#### End: Eureka Client configuration #### 

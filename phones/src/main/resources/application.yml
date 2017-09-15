@@ -4,8 +4,8 @@ server:
 
 # This is for health checkof the application.
 # http://localhost:1020/health  
-management:
-  port: ${PORT:1020}
+#management:
+#  port: ${PORT:1009}
   
 # Spring - application Name, Cache, JPA and datasource configuration. 
 spring:
@@ -13,6 +13,7 @@ spring:
     name: phones-service
   jpa: 
     database: MYSQL
+    show-sql: true
     hibernate:
       ddl-auto: create
   datasource:
@@ -32,7 +33,9 @@ logging:
       org.springframework: WARN
       org.hibernate: WARN
       
-# Eureka Client configuration
+##########################################
+#     Eureka Client configuration        #
+########################################## 
 eureka:  
   client:
     serviceUrl:
@@ -40,3 +43,4 @@ eureka:
   instance:
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
+#### End: Eureka Client configuration ####

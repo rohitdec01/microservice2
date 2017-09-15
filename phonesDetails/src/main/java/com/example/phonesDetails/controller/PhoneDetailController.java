@@ -19,6 +19,7 @@ import com.example.phonesDetails.service.PhoneDetailService;
  *
  */
 @RestController
+@RequestMapping("/*")
 public class PhoneDetailController {
 
 	/**
@@ -32,7 +33,7 @@ public class PhoneDetailController {
 	}
 
 	// @pathVariable
-	@RequestMapping(value = "/phonesDetail", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "phonesDetails", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<PhoneDetail>> getPhoneDetails() {
 		List<PhoneDetail> phonesDetail = phoneDetailService.getPhoneDetail();
 
@@ -43,7 +44,7 @@ public class PhoneDetailController {
 	 * @param phoneId
 	 * @return
 	 */
-	@RequestMapping(value = "/phoneDetail/phone/{phoneId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "phone/{phoneId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	// public ResponseEntity<Response> PhoneById(@RequestParam(value =
 	// "id") long id) throws PhoneException {
 	public ResponseEntity<PhoneDetail> getPhoneDetailById(@PathVariable("phoneId") Integer phoneId) {
